@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyService", "NancyService\NancyService.csproj", "{214B2579-DA17-4256-9E87-BC7343D21345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customized.Dapper", "Dapper.Customize\Customized.Dapper.csproj", "{1541410F-E077-4C5B-B986-C4C630FBE9E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyService.Model", "NancyService.Model\NancyService.Model.csproj", "{952F0EF8-176B-4A50-8FC3-B3991F4310A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Owin", "Nancy.Owin\Nancy.Owin.csproj", "{39F5C987-665D-4873-B3FF-594F7B8BF8B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyService.Util", "NancyService.Util\NancyService.Util.csproj", "{7F725A0F-0BF9-496C-9918-04E7BCC4D21B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{946EC1C7-490D-442A-B34D-58D7D02D9C5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{487CCC19-BC5F-4961-8976-F7BEDF806F1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{392CAE57-DEFF-4D07-B991-A93A691F76D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{3C07760C-A5AC-46EC-96C2-1CC9FE8866CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{214B2579-DA17-4256-9E87-BC7343D21345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{214B2579-DA17-4256-9E87-BC7343D21345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{214B2579-DA17-4256-9E87-BC7343D21345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{214B2579-DA17-4256-9E87-BC7343D21345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1541410F-E077-4C5B-B986-C4C630FBE9E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1541410F-E077-4C5B-B986-C4C630FBE9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1541410F-E077-4C5B-B986-C4C630FBE9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1541410F-E077-4C5B-B986-C4C630FBE9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952F0EF8-176B-4A50-8FC3-B3991F4310A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952F0EF8-176B-4A50-8FC3-B3991F4310A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952F0EF8-176B-4A50-8FC3-B3991F4310A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952F0EF8-176B-4A50-8FC3-B3991F4310A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F5C987-665D-4873-B3FF-594F7B8BF8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F5C987-665D-4873-B3FF-594F7B8BF8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F5C987-665D-4873-B3FF-594F7B8BF8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F5C987-665D-4873-B3FF-594F7B8BF8B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F725A0F-0BF9-496C-9918-04E7BCC4D21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F725A0F-0BF9-496C-9918-04E7BCC4D21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F725A0F-0BF9-496C-9918-04E7BCC4D21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F725A0F-0BF9-496C-9918-04E7BCC4D21B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{214B2579-DA17-4256-9E87-BC7343D21345} = {3C07760C-A5AC-46EC-96C2-1CC9FE8866CD}
+		{1541410F-E077-4C5B-B986-C4C630FBE9E0} = {946EC1C7-490D-442A-B34D-58D7D02D9C5E}
+		{952F0EF8-176B-4A50-8FC3-B3991F4310A7} = {487CCC19-BC5F-4961-8976-F7BEDF806F1C}
+		{39F5C987-665D-4873-B3FF-594F7B8BF8B6} = {3C07760C-A5AC-46EC-96C2-1CC9FE8866CD}
+		{7F725A0F-0BF9-496C-9918-04E7BCC4D21B} = {946EC1C7-490D-442A-B34D-58D7D02D9C5E}
+	EndGlobalSection
+EndGlobal
