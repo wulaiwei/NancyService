@@ -8,11 +8,10 @@
 // 修改标识：
 // 修改描述：
 //  ------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 using Nancy;
+using Nancy.Responses.Negotiation;
+using NancyService.Extensions.Exceptions;
 
 namespace NancyService.Modules
 {
@@ -22,9 +21,9 @@ namespace NancyService.Modules
         {
             Get["/content/index"] = p =>
             {
-                throw new Exception("safasdf");
+                //return Negotiate.WithView("Contnet/Index");
                 return View["Contnet/Index"];
-             };
+            };
         }
     }
 }

@@ -1,25 +1,19 @@
-﻿// ------------------------------------------------------------------------------
-// Copyright  成都积微物联电子商务有限公司 版权所有。 
-// 项目名：NancyService 
-// 文件名：BaseModule.cs
-// 创建标识：吴来伟 2017-04-28
-// 创建描述：
-// 
-// 修改标识：
-// 修改描述：
-//  ------------------------------------------------------------------------------
-
-using System;
-using Nancy;
+﻿using Nancy;
 using NancyService.Extensions.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace NancyService.Modules
 {
-    public class BaseModule : NancyModule
+    /// <summary>
+    /// API基础Module
+    /// </summary>
+    public class ApiModule: NancyModule
     {
-
-        public BaseModule(){
-            
+        public ApiModule() : base("/api")
+        {
             //执行之前
             Before += BeforeEvent;
 
@@ -48,7 +42,6 @@ namespace NancyService.Modules
         /// <returns></returns>
         private void AfterEvent(NancyContext ctx)
         {
-            
         }
 
         /// <summary>
@@ -62,8 +55,6 @@ namespace NancyService.Modules
             if (ex is UserFriendlyException)
             {
                 ctx.NegotiationContext.StatusCode = HttpStatusCode.OK;
-
-                
             }
 
             return null;

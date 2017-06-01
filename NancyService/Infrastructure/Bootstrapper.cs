@@ -25,32 +25,16 @@ namespace NancyService.Infrastructure
     {
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
-            // 全局异常处理
-            pipelines.OnError += ErrorEvent;
-
             //替换默认序列化方式
             container.Register<ISerializer, CustomJsonNetSerializer>();
 
             //自定义状态码处理
-            var errorStatusCodeConfiguration = (List<ErrorStatusCodeConfiguration>)
-             ConfigurationManager.GetSection("errorStatusCodeConfig");
+            //var errorStatusCodeConfiguration = (List<ErrorStatusCodeConfiguration>)
+            // ConfigurationManager.GetSection("errorStatusCodeConfig");
 
-            BaseStatusCodeHandler.AddCode(errorStatusCodeConfiguration);
+            //BaseStatusCodeHandler.AddCode(errorStatusCodeConfiguration);
 
             base.ApplicationStartup(container, pipelines);
-        }
-
-        /// <summary>
-        /// 异常事件
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ex"></param>
-        /// <returns></returns>
-        private Response ErrorEvent(NancyContext ctx, Exception ex)
-        {
-            LoggerHelper.DbLog.Error(ex.Message);
-
-            return null;
         }
 
 

@@ -1,7 +1,7 @@
 ﻿// ------------------------------------------------------------------------------
 // 项目名：NancyService
 // 
-// 文件名：BaseProcessor.cs
+// 文件名：BaseProcessor.csQQ
 // 
 // 创建标识：吴来伟 2017-05-08 12:05
 // 
@@ -32,7 +32,7 @@ namespace NancyService.ResponseHandler
             new[] {
                 #pragma warning disable 618
                      MediaRange.FromString("application/json"),
-                MediaRange.FromString("application/xml")
+                     MediaRange.FromString("application/xml")
                 #pragma warning restore 618
             };
 
@@ -59,7 +59,15 @@ namespace NancyService.ResponseHandler
 
         public Response Process(MediaRange requestedMediaRange, dynamic model, NancyContext context)
         {
-            var info = new BaseResponse(model, context, this._serializer, MediaType);
+            if (requestedMediaRange.ToString()== "text/html")
+            {
+                return new Response() {};
+            }
+            var info = new BaseResponse(
+                model,
+                context,
+                this._serializer,
+                MediaType);
             return info;
         }
 

@@ -5,36 +5,32 @@
 // 
 // 创建标识：吴来伟 2017-05-08 22:40
 // 
-// 修改标识：吴来伟2017-05-08 22:40
+// 修改标识：吴来伟 2017-05-08 22:40
 // 
 // ------------------------------------------------------------------------------
 
 using Nancy;
 using Nancy.ErrorHandling;
-using Nancy.IO;
 using Nancy.ViewEngines;
 using NancyService.ConfigurationSectionHandler.Model;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace NancyService.ResponseHandler
 {
     public class BaseStatusCodeHandler : IStatusCodeHandler
     {
-        private static IEnumerable<ErrorStatusCodeConfiguration> _checks = new List<ErrorStatusCodeConfiguration>();
-        public static IEnumerable<ErrorStatusCodeConfiguration> Checks { get { return _checks; } }
+        public static IEnumerable<ErrorStatusCodeConfiguration> Checks { get; private set; } = new List<ErrorStatusCodeConfiguration>();
 
         private static readonly string _defaultError="/Error/error.html";
 
         /// <summary>
         /// 视图
         /// </summary>
-        private IViewRenderer viewRenderer;
+        private readonly IViewRenderer _viewRenderer;
         public BaseStatusCodeHandler(IViewRenderer viewRenderer)
         {
-            this.viewRenderer = viewRenderer;
+            this._viewRenderer = viewRenderer;
         }
 
         /// <summary>
@@ -45,7 +41,23 @@ namespace NancyService.ResponseHandler
         /// <returns></returns>
         public bool HandlesStatusCode(HttpStatusCode statusCode, NancyContext context)
         {
-            return (_checks.Any(x => x.HttpStatusCode == statusCode)||statusCode !=HttpStatusCode.OK);
+            var info = false;
+            if (context.Response!=null)
+            {
+                return info;
+            }
+
+            if (context.NegotiationContext.StatusCode!=null)
+            {
+                info = (Checks.Any(x => x.HttpStatusCode == context.NegotiationContext.StatusCode)
+                || context.NegotiationContext.StatusCode != HttpStatusCode.OK);
+            }else
+            {
+                info = (Checks.Any(x => x.HttpStatusCode == statusCode)
+              || statusCode != HttpStatusCode.OK);
+            }
+
+            return info;
         }
 
         /// <summary>
@@ -55,8 +67,8 @@ namespace NancyService.ResponseHandler
         /// <param name="context"></param>
         public void Handle(HttpStatusCode statusCode, NancyContext context)
         {
-            var errorStatusCodeConfiguration = _checks.Where(x => x.HttpStatusCode == statusCode)
-                .FirstOrDefault();
+            var errorStatusCodeConfiguration = Checks
+                .FirstOrDefault(x => x.HttpStatusCode == statusCode);
 
             context.Response.ContentType = "text/html";
             context.Response.StatusCode = statusCode;
@@ -65,7 +77,7 @@ namespace NancyService.ResponseHandler
             {
                 url = errorStatusCodeConfiguration?.Url;
             }
-            var response = viewRenderer.RenderView(context, url);
+            var response = _viewRenderer.RenderView(context, url);
 
             context.Response = response;
         }
@@ -77,20 +89,20 @@ namespace NancyService.ResponseHandler
         }
         public static void AddCode(IEnumerable<ErrorStatusCodeConfiguration> code)
         {
-            _checks = _checks.Union(code);
+            Checks = Checks.Union(code);
         }
         public static void RemoveCode(HttpStatusCode httpStatusCode)
         {
-            var code = _checks.Where(x => x.HttpStatusCode == httpStatusCode).FirstOrDefault();
+            var code = Checks.Where(x => x.HttpStatusCode == httpStatusCode).FirstOrDefault();
             RemoveCode(new List<ErrorStatusCodeConfiguration>() { code });
         }
         public static void RemoveCode(IEnumerable<ErrorStatusCodeConfiguration> code)
         {
-            _checks = _checks.Except(code);
+            Checks = Checks.Except(code);
         }
         public static void Disable()
         {
-            _checks = new List<ErrorStatusCodeConfiguration>();
+            Checks = new List<ErrorStatusCodeConfiguration>();
         }
 
         #endregion

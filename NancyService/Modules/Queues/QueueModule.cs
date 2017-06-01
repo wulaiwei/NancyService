@@ -19,11 +19,11 @@ using NancyService.Model;
 using  Newtonsoft.Json;
 using NancyService.ResponseHandler;
 using NancyService.Util;
+using System.Threading;
 
-
-namespace NancyService.Modules
+namespace NancyService.Modules.Queues
 {
-    public class QueueModule : BaseModule
+    public class QueueModule : ApiModule
     {
         /// <summary>
         /// 队列接口
@@ -31,9 +31,10 @@ namespace NancyService.Modules
         public QueueModule()
         {
             //查询
-            Get["/Queue/Detail/{id:int}"] = p =>
+            Get["/queue/detail/{id:int}"] = p =>
             {
                 var id = (int)p.id;
+
                 using (var db = DbContext.CreateInstance())
                 {
                     var info = db.Get<Queue>(id);
@@ -43,7 +44,7 @@ namespace NancyService.Modules
             };
 
             //查询
-            Get["/Queue/Index"] = p =>
+            Get["/queue/index"] = p =>
             {
                 using (var db = DbContext.CreateInstance())
                 {
@@ -54,15 +55,13 @@ namespace NancyService.Modules
             };
 
             //列表
-            Get["/Queue/Code/{code}"] = p =>
+            Get["/queue/code/{code}"] = p =>
             {
                 var code= (string)p.code;
                 var num = Totp.GenerateCode(code);
 
                 return Negotiate.WithModel(num);
             };
-
-            Get[@"/"] = _ => View["firstView/hellonancy"];
         }
     }
 }
